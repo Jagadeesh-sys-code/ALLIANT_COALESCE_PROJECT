@@ -1,0 +1,42 @@
+fileVersion: 1
+id: f13388a1-c42b-42fa-b0cc-dbdb381e4b85
+name: ASTRUSMODELNCCITYPEOFLOSSCODE
+type: Node
+operation:
+  name: ASTRUSMODELNCCITYPEOFLOSSCODE
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_RPT
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f13388a1-1001-42fa-b0cc-dbdb381e4b85
+          stepCounter: f13388a1-c42b-42fa-b0cc-dbdb381e4b85
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: NCCI_TYPE_OF_LOSS_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f13388a1-1002-42fa-b0cc-dbdb381e4b85
+          stepCounter: f13388a1-c42b-42fa-b0cc-dbdb381e4b85
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: NCCI_TYPE_OF_LOSS
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+  schema: ''
+  sqlType: Source
+  version: 1

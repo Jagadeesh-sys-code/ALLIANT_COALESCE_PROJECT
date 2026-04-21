@@ -1,0 +1,81 @@
+fileVersion: 1
+id: df6f78e1-5ef2-4467-b8a7-7d6f5195b05a
+name: ASTRUSMODELMETHODOFSETTLEMENT
+type: Node
+operation:
+  name: ASTRUSMODELMETHODOFSETTLEMENT
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_RPT
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: df6f78e1-1001-4467-b8a7-7d6f5195b05a
+          stepCounter: df6f78e1-5ef2-4467-b8a7-7d6f5195b05a
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_METHOD_OF_SETTLEMENT_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: df6f78e1-1002-4467-b8a7-7d6f5195b05a
+          stepCounter: df6f78e1-5ef2-4467-b8a7-7d6f5195b05a
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: METHOD_OF_SETTLEMENT_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: df6f78e1-1003-4467-b8a7-7d6f5195b05a
+          stepCounter: df6f78e1-5ef2-4467-b8a7-7d6f5195b05a
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: METHOD_OF_SETTLEMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: df6f78e1-1004-4467-b8a7-7d6f5195b05a
+          stepCounter: df6f78e1-5ef2-4467-b8a7-7d6f5195b05a
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: NCCI_METHOD_OF_SETTLEMENT_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: df6f78e1-1005-4467-b8a7-7d6f5195b05a
+          stepCounter: df6f78e1-5ef2-4467-b8a7-7d6f5195b05a
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: NCCI_METHOD_OF_SETTLEMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+  schema: ''
+  sqlType: Source
+  version: 1

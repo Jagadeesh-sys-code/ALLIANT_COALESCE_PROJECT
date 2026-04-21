@@ -1,0 +1,55 @@
+fileVersion: 1
+id: b0df8a8c-1e6d-4bb8-bfcd-fb4c891eec0a
+name: ACA_SUMMARIZED_BODY_PART
+type: Node
+operation:
+  name: ACA_SUMMARIZED_BODY_PART
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_REF
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b0df8a8c-1001-4bb8-bfcd-fb4c891eec0a
+          stepCounter: b0df8a8c-1e6d-4bb8-bfcd-fb4c891eec0a
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: BODY_PART_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b0df8a8c-1002-4bb8-bfcd-fb4c891eec0a
+          stepCounter: b0df8a8c-1e6d-4bb8-bfcd-fb4c891eec0a
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b0df8a8c-1003-4bb8-bfcd-fb4c891eec0a
+          stepCounter: b0df8a8c-1e6d-4bb8-bfcd-fb4c891eec0a
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: SUMMARIZED_BODY_PART
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+  schema: ''
+  sqlType: Source
+  version: 1

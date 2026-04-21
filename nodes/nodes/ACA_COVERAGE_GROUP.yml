@@ -1,0 +1,55 @@
+fileVersion: 1
+id: 2de97e4c-1579-43c2-a9b8-d45ffea9cdbc
+name: ACA_COVERAGE_GROUP
+type: Node
+operation:
+  name: ACA_COVERAGE_GROUP
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_REF
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2de97e4c-1001-43c2-a9b8-d45ffea9cdbc
+          stepCounter: 2de97e4c-1579-43c2-a9b8-d45ffea9cdbc
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: CLAIM_COVERAGE_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2de97e4c-1002-43c2-a9b8-d45ffea9cdbc
+          stepCounter: 2de97e4c-1579-43c2-a9b8-d45ffea9cdbc
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2de97e4c-1003-43c2-a9b8-d45ffea9cdbc
+          stepCounter: 2de97e4c-1579-43c2-a9b8-d45ffea9cdbc
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: COVERAGE_GROUP
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+  schema: ''
+  sqlType: Source
+  version: 1

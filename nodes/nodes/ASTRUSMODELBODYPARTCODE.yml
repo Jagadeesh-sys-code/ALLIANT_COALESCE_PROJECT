@@ -1,0 +1,42 @@
+fileVersion: 1
+id: 0d8d08c5-92db-42cf-9615-5c1cfb96b349
+name: ASTRUSMODELBODYPARTCODE
+type: Node
+operation:
+  name: ASTRUSMODELBODYPARTCODE
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_RPT
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0d8d08c5-1001-42cf-9615-5c1cfb96b349
+          stepCounter: 0d8d08c5-92db-42cf-9615-5c1cfb96b349
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: PART_OF_BODY_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0d8d08c5-1002-42cf-9615-5c1cfb96b349
+          stepCounter: 0d8d08c5-92db-42cf-9615-5c1cfb96b349
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: PART_OF_BODY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+  schema: ''
+  sqlType: Source
+  version: 1

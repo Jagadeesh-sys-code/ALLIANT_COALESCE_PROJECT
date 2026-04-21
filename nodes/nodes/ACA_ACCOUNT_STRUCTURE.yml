@@ -1,0 +1,133 @@
+fileVersion: 1
+id: a22a3af1-efcf-443b-b46c-e54e4c278065
+name: ACA_ACCOUNT_STRUCTURE
+type: Node
+operation:
+  name: ACA_ACCOUNT_STRUCTURE
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1001-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_ACCOUNT_STRUCTURE_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1002-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: CLIENT_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1003-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: SITE_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1004-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: DIVISION_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1005-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: DIVISION_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1006-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: SUBSIDIARY_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1007-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: SUBSIDIARY_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1008-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: LOCATION_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a22a3af1-1009-443b-b46c-e54e4c278065
+          stepCounter: a22a3af1-efcf-443b-b46c-e54e4c278065
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: LOCATION_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+  schema: ''
+  sqlType: Source
+  version: 1
