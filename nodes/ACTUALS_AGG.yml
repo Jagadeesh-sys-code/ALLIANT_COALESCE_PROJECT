@@ -1,0 +1,87 @@
+fileVersion: 1
+id: c851513f-1b8c-8735-f301-ff8e7ea4eb25
+name: ACTUALS_AGG
+type: Node
+operation:
+  name: ACTUALS_AGG
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: ''
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: true
+  database: ''
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: PLANNING_ALLIANT_DBO
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c1a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b5c
+          stepCounter: c851513f-1b8c-8735-f301-ff8e7ea4eb25
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: BROKER_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 1b2b3b4b-5b6b-7b8b-9b0b-1b2b3b4b5b6b
+                stepCounter: 952e2e0c-e859-5402-c0de-cc5b4b71b8f2
+            transform: S.BROKER_PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c
+          stepCounter: c851513f-1b8c-8735-f301-ff8e7ea4eb25
+        config: {}
+        dataType: DATE
+        description: ''
+        name: BEGIN_POST_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 2c3c4c5c-6c7c-8c9c-0c1c-2c3c4c5c6c7c
+                stepCounter: 952e2e0c-e859-5402-c0de-cc5b4b71b8f2
+            transform: MIN(S.POST_DATE)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c3a4b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c
+          stepCounter: c851513f-1b8c-8735-f301-ff8e7ea4eb25
+        config: {}
+        dataType: DATE
+        description: ''
+        name: END_POST_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 2c3c4c5c-6c7c-8c9c-0c1c-2c3c4c5c6c7c
+                stepCounter: 952e2e0c-e859-5402-c0de-cc5b4b71b8f2
+            transform: MAX(S.POST_DATE)
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          S: S
+          BL: BL
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: PLANNING_FCCS_ACTUALS_STAGING
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: TMPBROKERLIST
+        join:
+          joinCondition: "FROM {{ ref('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_ACTUALS_STAGING')\
+            \ }} AS S \nINNER JOIN {{ ref('PLANNING_ALLIANT_DBO', 'TMPBROKERLIST')\
+            \ }} AS BL \n  ON S.BROKER_PLANNING_ID = BL.PLANNING_ID\nGROUP BY S.BROKER_PLANNING_ID"
+        name: ACTUALS_AGG
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1

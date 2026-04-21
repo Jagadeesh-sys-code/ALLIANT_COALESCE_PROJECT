@@ -1,0 +1,194 @@
+fileVersion: 1
+id: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+name: TMPBROKERLIST
+type: Node
+operation:
+  name: TMPBROKERLIST
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: "BEGIN\n    LET NO_ROWS INT := 300;\n    LET MAX_GROUP_ID INT;\n    LET\
+      \ COUNT_OF_MAX_GROUP_ID INT;\n    LET MAX_EXISTING_GROUP_ID INT;\n    LET EXISTING_GROUP_ROW_COUNT\
+      \ INT := 0;\n    LET NEW_GROUP_COUNT INT := 0;\n    LET NEW_GROUP_ROWS INT :=\
+      \ 0;\n    LET COUNTER INT;\n\n    SELECT MAX(TRY_CAST(REPLACE(T.EXISTING_PARENT_PLANNING_ID,\
+      \ '_Producer_Parent', '') AS INT))\n    INTO :MAX_EXISTING_GROUP_ID\n    FROM\
+      \ {{ ref_no_link('PLANNING_ALLIANT_DBO', 'TMPBROKERLIST') }} AS T;\n\n    SELECT\
+      \ MAX(TRY_CAST(SUBSTRING(P.PARENT_PLANNING_ID, 1, POSITION('_' IN P.PARENT_PLANNING_ID)-1)\
+      \ AS INT))\n    INTO :MAX_GROUP_ID\n    FROM PLANNING_ALLIANT.DBO.PLANNING_FCCS_BROKER\
+      \ AS P;\n\n    SELECT COUNT(1)\n    INTO :COUNT_OF_MAX_GROUP_ID\n    FROM PLANNING_ALLIANT.DBO.PLANNING_FCCS_BROKER\
+      \ AS P\n    WHERE TRY_CAST(SUBSTRING(P.PARENT_PLANNING_ID, 1, POSITION('_' IN\
+      \ P.PARENT_PLANNING_ID)-1) AS INT) = :MAX_GROUP_ID;\n\n    IF (:MAX_EXISTING_GROUP_ID\
+      \ = :MAX_GROUP_ID) THEN\n        COUNT_OF_MAX_GROUP_ID := 0;\n    END IF;\n\n\
+      \    IF (:MAX_GROUP_ID IS NOT NULL AND :MAX_EXISTING_GROUP_ID <> :MAX_GROUP_ID)\
+      \ THEN\n        LET ROWS_TO_UPDATE INT := :NO_ROWS - :COUNT_OF_MAX_GROUP_ID;\n\
+      \        IF (ROWS_TO_UPDATE > 0) THEN\n            UPDATE {{ ref_no_link('PLANNING_ALLIANT_DBO',\
+      \ 'TMPBROKERLIST') }} TGT\n            SET\n                NEW_PARENT_GROUP_ID\
+      \ = :MAX_GROUP_ID,\n                NEW_PARENT_PLANNING_ID = :MAX_GROUP_ID ||\
+      \ '_Producer_Parent',\n                NEW_PARENT_BROKER_COUNT = :COUNT_OF_MAX_GROUP_ID\
+      \ + SRC.RN\n            FROM (\n                SELECT T.ROW_ID, ROW_NUMBER()\
+      \ OVER (ORDER BY T.ROW_ID) AS RN\n                FROM {{ ref_no_link('PLANNING_ALLIANT_DBO',\
+      \ 'TMPBROKERLIST') }} AS T\n                WHERE T.NEW_PARENT_GROUP_ID IS NULL\n\
+      \                QUALIFY RN <= :ROWS_TO_UPDATE\n            ) SRC\n        \
+      \    WHERE TGT.ROW_ID = SRC.ROW_ID;\n\n            SELECT IFF(SQLROWCOUNT IS\
+      \ NULL, 0, SQLROWCOUNT) INTO :EXISTING_GROUP_ROW_COUNT;\n        END IF;\n\n\
+      \    COUNTER := COALESCE(:MAX_GROUP_ID, 0) + 1;\n    \n    WHILE ( (SELECT COUNT(1)\
+      \ FROM {{ ref_no_link('PLANNING_ALLIANT_DBO', 'TMPBROKERLIST') }} AS T WHERE\
+      \ T.NEW_PARENT_GROUP_ID IS NULL) > 0 ) DO\n    \n        UPDATE {{ ref_no_link('PLANNING_ALLIANT_DBO',\
+      \ 'TMPBROKERLIST') }} TGT\n        SET\n            NEW_PARENT_GROUP_ID = :COUNTER,\n\
+      \            NEW_PARENT_PLANNING_ID = :COUNTER || '_Producer_Parent',\n    \
+      \        NEW_PARENT_BROKER_COUNT = (TGT.ROW_ID - :EXISTING_GROUP_ROW_COUNT -\
+      \ :NEW_GROUP_ROWS),\n            NEW_PARENT_FLAG = 'Y'\n        FROM {{ ref_no_link('PLANNING_ALLIANT_DBO',\
+      \ 'TMPBROKERLIST') }} TGT_INNER\n        WHERE TGT.ROW_ID = TGT_INNER.ROW_ID\
+      \ AND TGT.NEW_PARENT_GROUP_ID IS NULL\n        QUALIFY ROW_NUMBER() OVER (ORDER\
+      \ BY TGT.ROW_ID) <= :NO_ROWS;\n\n        COUNTER := :COUNTER + 1;\n        NEW_GROUP_COUNT\
+      \ := :NEW_GROUP_COUNT + 1;\n        NEW_GROUP_ROWS := :NO_ROWS * :NEW_GROUP_COUNT;\n\
+      \n    END WHILE;\nEND;"
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: true
+  database: ''
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: PLANNING_ALLIANT_DBO
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d3a3b3c3-3456-4c3d-1e0f-9a8b7c6d5e4f
+                stepCounter: a63f3f1d-f96a-6513-d1ef-dd6c5c82c903
+            transform: T.PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b2a3c4d5-e6f7-4a8b-9c0d-1e2f3a4b5c6d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: BROKER_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d4a4b4c4-4567-4d4e-2f1a-0b9c8d7e6f5a
+                stepCounter: a63f3f1d-f96a-6513-d1ef-dd6c5c82c903
+            transform: T.BROKER_NAME
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b3a4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: EXISTING_PARENT_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d2a2b2c2-2345-4b2c-0d9e-8f7a6b5c4d3e
+                stepCounter: a63f3f1d-f96a-6513-d1ef-dd6c5c82c903
+            transform: T.PARENT_PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b4a5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: EXISTING_GROUP_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d2a2b2c2-2345-4b2c-0d9e-8f7a6b5c4d3e
+                stepCounter: a63f3f1d-f96a-6513-d1ef-dd6c5c82c903
+            transform: REPLACE(T.PARENT_PLANNING_ID, '_Producer_Parent', '')
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b5a6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: NEW_PARENT_GROUP_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: 'NULL'
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b6a7c8d9-e0f1-4a2b-3c4d-5e6f7a8b9c0d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: NEW_PARENT_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: 'NULL'
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b7a8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: NEW_PARENT_BROKER_COUNT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: 'NULL'
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b8a9c0d1-e2f3-4a4b-5c6d-7e8f9a0b1c2d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: VARCHAR(1)
+        description: ''
+        name: NEW_PARENT_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: '''N'''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b9a0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d
+          stepCounter: b740402e-0a7b-7624-e2f0-ee7d6d93da14
+        config: {}
+        dataType: NUMBER(19,0)
+        description: ''
+        name: ROW_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ROW_NUMBER() OVER (ORDER BY (SELECT NULL))
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          T: T
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: TMPDUPLICATELOOKUPALIAS
+        join:
+          joinCondition: 'FROM {{ ref(''PLANNING_ALLIANT_DBO'', ''TMPDUPLICATELOOKUPALIAS'')
+            }} AS T
+
+            WHERE T.ROW_ID <> 1'
+        name: TMPBROKERLIST
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1
