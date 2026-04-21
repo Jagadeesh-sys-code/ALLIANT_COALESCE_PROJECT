@@ -1,0 +1,99 @@
+fileVersion: 1
+id: d3a9e4b6-7f1c-48d2-a5e9-1b6c8f4d2a7e
+name: STG_SPACA_ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE_UPDATE
+type: Node
+operation:
+  name: STG_SPACA_ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE_UPDATE
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: "BEGIN\n    LET proc_name VARCHAR := 'SPACA_ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE_UPDATE';\n\
+      \    LET controlPackageDateId INT := {{ parameters.ICONTROLPACKAGEDATEID }};\n\
+      \n    FOR row_var IN (\n        SELECT\n            dt.ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE_ID,\n\
+      \            t.DATABASE_NAME,\n            t.SCHEMA_NAME,\n            t.TABLE_NAME,\n\
+      \            t.DATE_COLUMN,\n            t.BACKUP_TABLE_NAME_POSTFIX,\n    \
+      \        d.SOURCE_DATE\n        FROM {{ ref_no_link('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO',\
+      \ 'ACA_CONTROL_PACKAGE_DATE') }} AS d\n        INNER JOIN {{ ref_no_link('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO',\
+      \ 'ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE') }} AS dt\n            ON dt.ACA_CONTROL_PACKAGE_DATE_ID\
+      \ = d.ACA_CONTROL_PACKAGE_DATE_ID\n        INNER JOIN {{ ref_no_link('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO',\
+      \ 'ACA_CONTROL_PACKAGE_SOURCE_TABLE') }} AS t\n            ON t.ACA_CONTROL_PACKAGE_SOURCE_TABLE_ID\
+      \ = dt.ACA_CONTROL_PACKAGE_SOURCE_TABLE_ID\n        WHERE d.ACA_CONTROL_PACKAGE_DATE_ID\
+      \ = :controlPackageDateId\n          AND dt.LOADED_FLAG = 0\n    )\n    DO\n\
+      \        LET pInsertColumnList VARCHAR;\n        LET pSelectColumnList VARCHAR;\n\
+      \        LET insertCount INT;\n        LET full_table_name VARCHAR := row_var.DATABASE_NAME\
+      \ || '.' || row_var.SCHEMA_NAME || '.' || row_var.TABLE_NAME;\n        LET backup_table_name\
+      \ VARCHAR := full_table_name || COALESCE(row_var.BACKUP_TABLE_NAME_POSTFIX,\
+      \ '');\n\n        LET sql_get_cols VARCHAR := 'SELECT LISTAGG(COLUMN_NAME, '',\
+      \ '') WITHIN GROUP (ORDER BY ORDINAL_POSITION) FROM ' || row_var.DATABASE_NAME\
+      \ || '.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = ''' || row_var.SCHEMA_NAME\
+      \ || ''' AND TABLE_NAME = ''' || row_var.TABLE_NAME || '''';\n        \n   \
+      \     EXECUTE IMMEDIATE :sql_get_cols;\n        \n        pInsertColumnList\
+      \ := (SELECT $1 FROM TABLE(RESULT_SCAN(LAST_QUERY_ID())));\n\n        IF (pInsertColumnList\
+      \ IS NOT NULL) THEN\n            pSelectColumnList := REPLACE(:pInsertColumnList,\
+      \ row_var.DATE_COLUMN, 'CURRENT_TIMESTAMP()');\n            \n            LET\
+      \ sqlInsert VARCHAR := 'INSERT INTO ' || :full_table_name || ' (' || :pInsertColumnList\
+      \ || ') ' ||\n                                     'SELECT ' || :pSelectColumnList\
+      \ || ' FROM ' || :backup_table_name || ' ' ||\n                            \
+      \         'WHERE CAST(' || row_var.DATE_COLUMN || ' AS DATE) = ?';\n       \
+      \     \n            EXECUTE IMMEDIATE :sqlInsert USING(row_var.SOURCE_DATE);\n\
+      \            insertCount := SQLROWCOUNT;\n\n            UPDATE {{ ref_no_link('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO',\
+      \ 'ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE') }}\n            SET\n           \
+      \     LOADED_FLAG = 1,\n                INSERTED_RECORD_COUNT = :insertCount,\n\
+      \                ACA_DATE_UPDATED = CURRENT_TIMESTAMP(),\n                ACA_UPDATE_USER\
+      \ = :proc_name\n            WHERE ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE_ID =\
+      \ row_var.ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE_ID;\n        END IF;\n    END\
+      \ FOR;\nEND;"
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: true
+  database: ALLIANT_CLAIMS_ASTRUS_STAGE
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: ALLIANT_CLAIMS_ASTRUS_STAGE_DBO
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e7b2d5f8-9a4c-41e6-b9c3-4d8f1a5e7b2d
+          stepCounter: d3a9e4b6-7f1c-48d2-a5e9-1b6c8f4d2a7e
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: DW_LOAD_TS
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CURRENT_TIMESTAMP()
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          D: D
+          DT: DT
+          T: T
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: ALLIANT_CLAIMS_ASTRUS_STAGE_DBO
+            nodeName: ACA_CONTROL_PACKAGE_DATE
+          - locationName: ALLIANT_CLAIMS_ASTRUS_STAGE_DBO
+            nodeName: ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE
+          - locationName: ALLIANT_CLAIMS_ASTRUS_STAGE_DBO
+            nodeName: ACA_CONTROL_PACKAGE_SOURCE_TABLE
+        join:
+          joinCondition: "FROM {{ ref('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO', 'ACA_CONTROL_PACKAGE_DATE')\
+            \ }} AS D\nINNER JOIN {{ ref('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO', 'ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE')\
+            \ }} AS DT\n    ON DT.ACA_CONTROL_PACKAGE_DATE_ID = D.ACA_CONTROL_PACKAGE_DATE_ID\n\
+            INNER JOIN {{ ref('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO', 'ACA_CONTROL_PACKAGE_SOURCE_TABLE')\
+            \ }} AS T\n    ON T.ACA_CONTROL_PACKAGE_SOURCE_TABLE_ID = DT.ACA_CONTROL_PACKAGE_SOURCE_TABLE_ID\n\
+            WHERE D.ACA_CONTROL_PACKAGE_DATE_ID = {{ parameters.ICONTROLPACKAGEDATEID\
+            \ }}\n  AND DT.LOADED_FLAG = 0"
+        name: STG_SPACA_ACA_CONTROL_PACKAGE_DATE_SOURCE_TABLE_UPDATE
+        noLinkRefs: []
+  overrideSQL: false
+  schema: DBO
+  sqlType: Stage
+  version: 1
