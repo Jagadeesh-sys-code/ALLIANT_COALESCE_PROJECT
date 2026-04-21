@@ -1,0 +1,210 @@
+fileVersion: 1
+id: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+name: TMPDUPLICATELOOKUPALIAS
+type: Node
+operation:
+  name: TMPDUPLICATELOOKUPALIAS
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: ''
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: true
+  database: ''
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: PLANNING_ALLIANT_STAGING
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8b0c8b6b-c3fb-46a4-bb50-a9cfc3b7a5a8
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: PLANNING_FCCS_CLIENT_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: cf7b243b-28f0-4db8-8317-a068a0a1debc
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.PLANNING_FCCS_CLIENT_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a5e5261-002f-48d8-9df2-5d9e5b38dcdb
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: PARENT_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: a356c9d0-23a9-450f-90e9-7becc2fbde38
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.PARENT_PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c06ab450-9366-4e59-a2a4-2dfecb90ea50
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: f6e8e841-a6e3-4d43-bdce-668b8e0a37e1
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0f0dc94a-3bb1-4191-beaf-cc810f51d8db
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: CLIENT_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d1d20067-17cf-45b6-bfbc-87c2fa5df7b6
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.CLIENT_NAME
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d17a3f3a-1dcf-4217-a0f5-5b48db92baab
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: VARCHAR(50)
+        description: ''
+        name: SOURCE_SYSTEM_CLIENT_LOOKUP_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 2ac4df42-3a5c-411a-ab53-15be62283a00
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.SOURCE_SYSTEM_CLIENT_LOOKUP_CODE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: dbb2d56a-12e0-47b2-85be-58a436f5c8ed
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: VARCHAR(50)
+        description: ''
+        name: SOURCE_SYSTEM_CLIENT_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: e5b61427-0ea8-4eeb-b2ef-3755c3c0ef2b
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.SOURCE_SYSTEM_CLIENT_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a63af541-ef1d-40d6-9ec1-f76e33f389fb
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: DW_SOURCE_SYSTEM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 15b139db-cdb4-4b47-9750-f8cc0a37da54
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.DW_SOURCE_SYSTEM_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 17ddbe87-578f-4ed7-995a-c5c99d0e7a25
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: CHAR(1)
+        description: ''
+        name: CURRENT_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: bca2fc54-ed67-4e58-94f4-0b1a03004f14
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.CURRENT_FLAG
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: af684347-dd4b-4a37-b6f2-dd6ca1e2e6c5
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: DW_DATE_CREATED
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 7f7afc53-b258-4cc3-92f3-c5b6028a30ef
+                stepCounter: ebc5789f-8d2a-4a7f-a63e-b8d96205844a
+            transform: C.DW_DATE_CREATED
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: cd262447-9ab4-4f93-8b77-ef5604ec2820
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: DW_SOURCE_SYSTEM_ID_COUNT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: DUP.DW_SOURCE_SYSTEM_ID_COUNT
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b1dbf41d-e0eb-48b0-a544-777ecdbab542
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: PARENT_PLANNING_ID_COUNT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: DUP.PARENT_PLANNING_ID_COUNT
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: cb7e9238-3486-455b-b9f1-d00db0b127ff
+          stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+        config: {}
+        dataType: NUMBER(19,0)
+        description: ''
+        name: ROW_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: RANK() OVER(PARTITION BY C.SOURCE_SYSTEM_CLIENT_LOOKUP_CODE
+              ORDER BY C.CURRENT_FLAG, C.DW_DATE_CREATED, C.PLANNING_FCCS_CLIENT_ID)
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          C: C
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: PLANNING_FCCS_CLIENT
+        join:
+          joinCondition: "WITH DUP AS (\n    SELECT\n        SOURCE_SYSTEM_CLIENT_LOOKUP_CODE,\n\
+            \        COUNT(DISTINCT DW_SOURCE_SYSTEM_ID) AS DW_SOURCE_SYSTEM_ID_COUNT,\n\
+            \        COUNT(DISTINCT PARENT_PLANNING_ID) AS PARENT_PLANNING_ID_COUNT\n\
+            \    FROM {{ ref('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_CLIENT') }}\n\
+            \    GROUP BY SOURCE_SYSTEM_CLIENT_LOOKUP_CODE\n    HAVING COUNT(DISTINCT\
+            \ DW_SOURCE_SYSTEM_ID) > 1\n    AND COUNT(DISTINCT PARENT_PLANNING_ID)\
+            \ = 1\n)\nFROM {{ ref('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_CLIENT')\
+            \ }} AS C\nINNER JOIN DUP ON C.SOURCE_SYSTEM_CLIENT_LOOKUP_CODE = DUP.SOURCE_SYSTEM_CLIENT_LOOKUP_CODE"
+        name: TMPDUPLICATELOOKUPALIAS
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1

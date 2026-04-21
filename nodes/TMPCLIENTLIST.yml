@@ -1,0 +1,196 @@
+fileVersion: 1
+id: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+name: TMPCLIENTLIST
+type: Node
+operation:
+  name: TMPCLIENTLIST
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: "BEGIN\n    LET NO_ROWS DECIMAL(8, 2) := 300.00;\n    LET MAX_GROUP_ID\
+      \ INT;\n    LET COUNT_OF_MAX_GROUP_ID INT;\n    LET COUNTER INT;\n    LET EXISTING_GROUP_ROW_COUNT\
+      \ INT := 0;\n    LET NEW_GROUP_COUNT INT := 0;\n    LET NEW_GROUP_ROWS INT :=\
+      \ 0;\n    LET MAX_EXISTING_GROUP_ID INT;\n    \n    SELECT MAX(CAST(EXISTING_GROUP_ID\
+      \ AS INT)) INTO :MAX_EXISTING_GROUP_ID FROM {{ ref_no_link('PLANNING_ALLIANT_STAGING',\
+      \ 'TMPCLIENTLIST') }};\n\n    SELECT MAX(TRY_CAST(SUBSTRING(PARENT_PLANNING_ID,\
+      \ 1, POSITION('_' IN PARENT_PLANNING_ID) - 1) AS INT)) INTO :MAX_GROUP_ID FROM\
+      \ {{ ref('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_CLIENT') }};\n    SELECT COUNT(1)\
+      \ INTO :COUNT_OF_MAX_GROUP_ID FROM {{ ref('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_CLIENT')\
+      \ }} WHERE TRY_CAST(SUBSTRING(PARENT_PLANNING_ID, 1, POSITION('_' IN PARENT_PLANNING_ID)\
+      \ - 1) AS INT) = :MAX_GROUP_ID;\n\n    IF (:MAX_EXISTING_GROUP_ID = :MAX_GROUP_ID)\
+      \ THEN\n        SELECT 0 INTO :COUNT_OF_MAX_GROUP_ID;\n    END IF;\n\n    IF\
+      \ (:MAX_GROUP_ID IS NOT NULL AND :MAX_EXISTING_GROUP_ID <> :MAX_GROUP_ID) THEN\n\
+      \        LET ROWS_TO_UPDATE INT := CAST(:NO_ROWS AS INT) - :COUNT_OF_MAX_GROUP_ID;\n\
+      \        UPDATE {{ ref_no_link('PLANNING_ALLIANT_STAGING', 'TMPCLIENTLIST')\
+      \ }} AS T\n        SET \n            T.NEW_PARENT_GROUP_ID = :MAX_GROUP_ID,\n\
+      \            T.NEW_PARENT_PLANNING_ID = :MAX_GROUP_ID || '_Client_Parent',\n\
+      \            T.NEW_PARENT_CLIENT_COUNT = :COUNT_OF_MAX_GROUP_ID + S.RN\n   \
+      \     FROM (\n            SELECT PLANNING_ID, ROW_NUMBER() OVER (ORDER BY PLANNING_ID)\
+      \ AS RN\n            FROM {{ ref_no_link('PLANNING_ALLIANT_STAGING', 'TMPCLIENTLIST')\
+      \ }}\n            WHERE NEW_PARENT_GROUP_ID IS NULL\n        ) AS S\n      \
+      \  WHERE T.PLANNING_ID = S.PLANNING_ID AND S.RN <= ROWS_TO_UPDATE;\n       \
+      \ EXISTING_GROUP_ROW_COUNT := SQLROWCOUNT + :EXISTING_GROUP_ROW_COUNT;\n   \
+      \ END IF;\n\n    COUNTER := COALESCE(:MAX_GROUP_ID, 0) + 1;\n    WHILE ((SELECT\
+      \ COUNT(1) FROM {{ ref_no_link('PLANNING_ALLIANT_STAGING', 'TMPCLIENTLIST')\
+      \ }} WHERE NEW_PARENT_GROUP_ID IS NULL) > 0) DO\n\n        UPDATE {{ ref_no_link('PLANNING_ALLIANT_STAGING',\
+      \ 'TMPCLIENTLIST') }} AS T\n        SET \n            T.NEW_PARENT_GROUP_ID\
+      \ = :COUNTER,\n            T.NEW_PARENT_PLANNING_ID = :COUNTER || '_Client_Parent',\n\
+      \            T.NEW_PARENT_CLIENT_COUNT = S.RN - :EXISTING_GROUP_ROW_COUNT -\
+      \ :NEW_GROUP_ROWS,\n            T.NEW_PARENT_FLAG = 'Y'\n        FROM (\n  \
+      \          SELECT PLANNING_ID, ROW_NUMBER() OVER (ORDER BY PLANNING_ID) AS RN\n\
+      \            FROM {{ ref_no_link('PLANNING_ALLIANT_STAGING', 'TMPCLIENTLIST')\
+      \ }}\n            WHERE NEW_PARENT_GROUP_ID IS NULL\n        ) AS S\n      \
+      \  WHERE T.PLANNING_ID = S.PLANNING_ID AND S.RN <= CAST(:NO_ROWS AS INT);\n\n\
+      \        COUNTER := :COUNTER + 1;\n        NEW_GROUP_COUNT := :NEW_GROUP_COUNT\
+      \ + 1;\n        NEW_GROUP_ROWS := :NO_ROWS * :NEW_GROUP_COUNT;\n\n    END WHILE;\n\
+      END;"
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: true
+  database: ''
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: PLANNING_ALLIANT_STAGING
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b13c9ec2-c3f2-45e0-8b1b-262afdf21f26
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c06ab450-9366-4e59-a2a4-2dfecb90ea50
+                stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+            transform: TDA.PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: bc79bdff-063a-4a25-8664-df8120d0f419
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: CLIENT_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 0f0dc94a-3bb1-4191-beaf-cc810f51d8db
+                stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+            transform: TDA.CLIENT_NAME
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 32247cc9-9602-4c28-98f5-96efdd542d17
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: EXISTING_PARENT_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 1a5e5261-002f-48d8-9df2-5d9e5b38dcdb
+                stepCounter: c01a5ebf-af10-44ec-b8d2-1c2f21619a9a
+            transform: TDA.PARENT_PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 80775a22-4882-411a-bc04-8b630327f2f1
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: EXISTING_GROUP_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: REPLACE(TDA.PARENT_PLANNING_ID, '_Client_Parent', '')
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a6f958f3-8b7a-4ec0-b8e7-eb4a4d6f03d5
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: NEW_PARENT_GROUP_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: CAST(NULL AS NUMBER(10,0))
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: fa41f4d8-21d3-4874-a690-36e2d9354020
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: NEW_PARENT_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: CAST(NULL AS VARCHAR(100))
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5d134d1b-dd34-4b47-ba61-8d26df500af3
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: NEW_PARENT_CLIENT_COUNT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: CAST(NULL AS NUMBER(10,0))
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1f93f6aa-75eb-42cc-bbd5-cd4e743284cd
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: CHAR(1)
+        description: ''
+        name: NEW_PARENT_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: '''N'''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: fb00c0db-ef67-4bd9-9481-9b6d80424b91
+          stepCounter: 80c0dbf8-5ed2-40e8-9669-e31d4cdb4a45
+        config: {}
+        dataType: NUMBER(19,0)
+        description: ''
+        name: ROW_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ROW_NUMBER() OVER (ORDER BY TDA.PLANNING_ID)
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          TDA: TDA
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: PLANNING_ALLIANT_STAGING
+            nodeName: TMPDUPLICATELOOKUPALIAS
+        join:
+          joinCondition: 'FROM {{ ref(''PLANNING_ALLIANT_STAGING'', ''TMPDUPLICATELOOKUPALIAS'')
+            }} AS TDA
+
+            WHERE TDA.ROW_ID <> 1'
+        name: TMPCLIENTLIST
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1
