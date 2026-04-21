@@ -1,0 +1,47 @@
+fileVersion: 1
+id: a93bd9f1-ebfc-4828-98da-90d55e8c1b97
+name: SF_CLAIM_ID_STAGE
+type: Node
+operation:
+  name: SF_CLAIM_ID_STAGE
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_ONE_STG
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f11a2bd6-9fba-4b2a-8ca1-4f114c0a1da1
+          stepCounter: a93bd9f1-ebfc-4828-98da-90d55e8c1b97
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_CLAIM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e12b3c4f-afb1-4bc5-9c8a-7b3b3a216b20
+          stepCounter: a93bd9f1-ebfc-4828-98da-90d55e8c1b97
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_SALESFORCE_CLAIM_SPECIALTY_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+  overrideSQL: false
+  schema: ''
+  sqlType: Source
+  version: 1
