@@ -1,0 +1,40 @@
+fileVersion: 1
+id: 7d0a21cf-369b-4e1c-b26a-61d02c8427f3
+name: ACA_PAYMENT_TRANSACTION
+type: Node
+operation:
+  name: ACA_PAYMENT_TRANSACTION
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 45af8991-23cc-4c12-9c44-d83cf824fb72
+          stepCounter: 7d0a21cf-369b-4e1c-b26a-61d02c8427f3
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: ACA_DATE_UPDATED
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2b821a81-cf33-4df4-b3da-8e10c73796d1
+          stepCounter: 7d0a21cf-369b-4e1c-b26a-61d02c8427f3
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+  schema: ''
+  sqlType: Source
+  version: 1

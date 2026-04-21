@@ -1,0 +1,40 @@
+fileVersion: 1
+id: 9c581234-8c81-42e1-b4f4-5f8a071286c9
+name: ACA_SOURCE_SYSTEM
+type: Node
+operation:
+  name: ACA_SOURCE_SYSTEM
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3a4f891b-6d21-4f18-bbcd-96a836f1c4d9
+          stepCounter: 9c581234-8c81-42e1-b4f4-5f8a071286c9
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b71df89c-482a-42c1-84c1-6b83f4d1e2e1
+          stepCounter: 9c581234-8c81-42e1-b4f4-5f8a071286c9
+        config: {}
+        dataType: VARCHAR
+        description: ''
+        name: SOURCE_SYSTEM
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+  schema: ''
+  sqlType: Source
+  version: 1
