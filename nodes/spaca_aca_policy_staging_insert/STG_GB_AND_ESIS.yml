@@ -1,0 +1,209 @@
+fileVersion: 1
+id: 22180860-af30-4e5f-bfcf-2270b22a61a0
+name: STG_GB_AND_ESIS
+type: Node
+operation:
+  name: STG_GB_AND_ESIS
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: ''
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: true
+  database: ''
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: ALLIANT_CLAIMS_ASTRUS_STAGE_DBO
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: cb02ef2c-29d3-4696-a81d-bf1bc40c6c01
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: BINARY(16)
+        description: ''
+        name: SOURCE_SYSTEM_POLICY_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 82b4a1f7-e4a9-4561-bd8c-1e24749f96b3
+                stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+            transform: ''
+        transform: GB.SOURCE_SYSTEM_POLICY_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b675fbde-f99a-4122-83b3-8abde71d3434
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: VARCHAR(30)
+        description: ''
+        name: POLICY_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 93c5b2a8-f5b0-5672-ce9d-2f3585a0a7c4
+                stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+            transform: ''
+        transform: GB.POLICY_NUMBER
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5d6ff7db-3121-4f0f-bb7e-fbb6bb6e42df
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: DATE
+        description: ''
+        name: EFFECTIVE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: a4d6c3b9-06c1-6783-dfae-304696b1b8d5
+                stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+            transform: ''
+        transform: GB.EFFECTIVE_DATE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0a6a43b2-dc09-436d-9ab0-eb787cd0a2c3
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: DATE
+        description: ''
+        name: EXPIRATION_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: b5e7d4ca-17d2-7894-e0bf-4157a7c2c9e6
+                stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+            transform: ''
+        transform: IFF(ESIS.EXPIRATION_DATE > GB.EXPIRATION_DATE, ESIS.EXPIRATION_DATE,
+          GB.EXPIRATION_DATE)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 160d5e1b-b4a1-432a-bc95-021c326e6d1b
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: NUMBER(1,0)
+        description: ''
+        name: CASE_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: '1'
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 483db46e-1da5-42cf-bb5c-7d72807e6b77
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: CASE_DESCRIPTION
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: '''Records that exists in both GB and ESIS'''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: eb268a83-a226-444f-83ea-6df2c4fc7287
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID_WINNER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c6f8e5db-28e3-8905-f1c0-5268b8d3daf7
+                stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+            transform: ''
+        transform: IFF(ESIS.EXPIRATION_DATE > GB.EXPIRATION_DATE, ESIS.ACA_SOURCE_SYSTEM_ID,
+          GB.ACA_SOURCE_SYSTEM_ID)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 95ab99f5-76af-42cb-b1b7-a3a30c5e73d3
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: ACA_DATE_CREATED
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: CURRENT_TIMESTAMP()
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: da6e0539-c146-44e2-9b59-af25492af7d3
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: ACA_CREATE_USER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: '''spaca_aca_policy_staging_insert'''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d0134bc2-8ef0-48a5-8120-00df2fc89d5f
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: ACA_DATE_UPDATED
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: CURRENT_TIMESTAMP()
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0cf0d796-caeb-4d51-92f5-b3e5a25bdfa4
+          stepCounter: 22180860-af30-4e5f-bfcf-2270b22a61a0
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: ACA_UPDATE_USER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        transform: '''spaca_aca_policy_staging_insert'''
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          GB: GB
+          ESIS: ESIS
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+            nodeName: ACA_POLICY_GB
+          - locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+            nodeName: ACA_POLICY_ESIS
+          - locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+            nodeName: ACA_POLICY
+        join:
+          joinCondition: "FROM {{ ref('ALLIANT_CLAIMS_ASTRUS_DBO', 'ACA_POLICY_GB')\
+            \ }} AS GB\nINNER JOIN {{ ref('ALLIANT_CLAIMS_ASTRUS_DBO', 'ACA_POLICY_ESIS')\
+            \ }} AS ESIS\n  ON ESIS.SOURCE_SYSTEM_POLICY_ID = GB.SOURCE_SYSTEM_POLICY_ID\n\
+            WHERE GB.ACA_POLICY_GB_ID <> -1\n  AND ESIS.ACA_POLICY_ESIS_ID <> -1\n\
+            \  AND GB.ACA_DATE_UPDATED > (SELECT COALESCE(MAX(ACA_DATE_UPDATED), CAST('1776-07-04\
+            \ 00:00:00.000' AS TIMESTAMP_NTZ)) FROM {{ ref('ALLIANT_CLAIMS_ASTRUS_DBO',\
+            \ 'ACA_POLICY') }} WHERE ACA_POLICY_ID <> -1)\n  AND ESIS.ACA_DATE_UPDATED\
+            \ > (SELECT COALESCE(MAX(ACA_DATE_UPDATED), CAST('1776-07-04 00:00:00.000'\
+            \ AS TIMESTAMP_NTZ)) FROM {{ ref('ALLIANT_CLAIMS_ASTRUS_DBO', 'ACA_POLICY')\
+            \ }} WHERE ACA_POLICY_ID <> -1)"
+        name: STG_GB_AND_ESIS
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1

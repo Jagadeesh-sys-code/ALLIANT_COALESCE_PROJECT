@@ -1,0 +1,121 @@
+fileVersion: 1
+id: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+name: ACA_POLICY_GB
+type: Node
+operation:
+  name: ACA_POLICY_GB
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 82b4a1f7-e4a9-4561-bd8c-1e24749f96b3
+          stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+        config: {}
+        dataType: BINARY(16)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_POLICY_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 93c5b2a8-f5b0-5672-ce9d-2f3585a0a7c4
+          stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+        config: {}
+        dataType: VARCHAR(30)
+        defaultValue: ''
+        description: ''
+        name: POLICY_NUMBER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a4d6c3b9-06c1-6783-dfae-304696b1b8d5
+          stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+        config: {}
+        dataType: DATE
+        defaultValue: ''
+        description: ''
+        name: EFFECTIVE_DATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b5e7d4ca-17d2-7894-e0bf-4157a7c2c9e6
+          stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+        config: {}
+        dataType: DATE
+        defaultValue: ''
+        description: ''
+        name: EXPIRATION_DATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c6f8e5db-28e3-8905-f1c0-5268b8d3daf7
+          stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 16b23a9d-15f6-4d2c-8a19-45e0d3c69f21
+          stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_POLICY_GB_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 27c34b0e-26a7-5e3d-9b20-56f1e4d70b32
+          stepCounter: 37a5f6e8-23c4-4b9d-9d45-7140b92e5c82
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        defaultValue: ''
+        description: ''
+        name: ACA_DATE_UPDATED
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+  schema: ''
+  sqlType: Source
+  version: 1

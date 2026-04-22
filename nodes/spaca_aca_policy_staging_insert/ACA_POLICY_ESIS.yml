@@ -1,0 +1,121 @@
+fileVersion: 1
+id: 48b607f9-34d5-5cae-ae56-8251ca3f6d93
+name: ACA_POLICY_ESIS
+type: Node
+operation:
+  name: ACA_POLICY_ESIS
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+  metadata:
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 17e5d2b8-f1c2-48a9-9132-7f283594b2a3
+          stepCounter: 48b607f9-34d5-5cae-ae56-8251ca3f6d93
+        config: {}
+        dataType: BINARY(16)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_POLICY_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 28f6e3c9-02d3-59ba-a243-803946a5c3b4
+          stepCounter: 48b607f9-34d5-5cae-ae56-8251ca3f6d93
+        config: {}
+        dataType: VARCHAR(30)
+        defaultValue: ''
+        description: ''
+        name: POLICY_NUMBER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3907f4da-13e4-6acb-b354-914a57b6d4c5
+          stepCounter: 48b607f9-34d5-5cae-ae56-8251ca3f6d93
+        config: {}
+        dataType: DATE
+        defaultValue: ''
+        description: ''
+        name: EFFECTIVE_DATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4a1805eb-24f5-7bdc-c465-a25b68c7e5d6
+          stepCounter: 48b607f9-34d5-5cae-ae56-8251ca3f6d93
+        config: {}
+        dataType: DATE
+        defaultValue: ''
+        description: ''
+        name: EXPIRATION_DATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5b2916fc-3506-8ced-d576-b36c79d8f6e7
+          stepCounter: 48b607f9-34d5-5cae-ae56-8251ca3f6d93
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 38d45c1f-37a8-6f4e-ac31-6702f5e81a43
+          stepCounter: 48b607f9-34d5-5cae-ae56-8251ca3f6d93
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_POLICY_ESIS_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 49e56d20-48a9-7a5f-bd42-781306f92a54
+          stepCounter: 48b607f9-34d5-5cae-ae56-8251ca3f6d93
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        defaultValue: ''
+        description: ''
+        name: ACA_DATE_UPDATED
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+  schema: ''
+  sqlType: Source
+  version: 1
