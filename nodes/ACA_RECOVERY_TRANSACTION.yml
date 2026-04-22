@@ -1,0 +1,423 @@
+fileVersion: 1
+id: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+name: ACA_RECOVERY_TRANSACTION
+type: Node
+operation:
+  name: ACA_RECOVERY_TRANSACTION
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: ''
+    preSQL: "BEGIN\n    -- Step #1.2: Delete Existing GB Transaction\n    DELETE FROM\
+      \ ALLIANT_CLAIMS_ASTRUS.DBO.ACA_RECOVERY_TRANSACTION\n    WHERE ACA_SOURCE_SYSTEM_ID\
+      \ = (SELECT ACA_SOURCE_SYSTEM_ID FROM ALLIANT_CLAIMS_ASTRUS.DBO.ACA_SOURCE_SYSTEM\
+      \ WHERE SOURCE_SYSTEM = 'GB')\n    AND RECOVERY_TRANSACTION_DATE IN (SELECT\
+      \ RECOVERY_TRANSACTION_DATE\n                                      FROM {{ ref_no_link('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO',\
+      \ 'ACA_RECOVERY_TRANSACTION_STAGING_GB') }}\n                              \
+      \        GROUP BY RECOVERY_TRANSACTION_DATE);\n\n    -- Step #1.3: Delete Existing\
+      \ ESIS Transaction\n    DELETE FROM ALLIANT_CLAIMS_ASTRUS.DBO.ACA_RECOVERY_TRANSACTION\n\
+      \    WHERE ACA_SOURCE_SYSTEM_ID = (SELECT ACA_SOURCE_SYSTEM_ID FROM ALLIANT_CLAIMS_ASTRUS.DBO.ACA_SOURCE_SYSTEM\
+      \ WHERE SOURCE_SYSTEM = 'ESIS')\n    AND RECOVERY_TRANSACTION_DATE IN (SELECT\
+      \ RECOVERY_TRANSACTION_DATE\n                                      FROM {{ ref_no_link('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO',\
+      \ 'ACA_RECOVERY_TRANSACTION_STAGING_ESIS') }}\n                            \
+      \          GROUP BY RECOVERY_TRANSACTION_DATE);\nEND;"
+    testsEnabled: true
+    truncateBefore: true
+  database: ''
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d01
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: BINARY(16)
+        description: ''
+        name: SOURCE_SYSTEM_RECOVERY_TRANSACTION_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c01
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.SOURCE_SYSTEM_RECOVERY_TRANSACTION_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d02
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_CLAIM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c02
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.ACA_CLAIM_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d03
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_RESERVE_TYPE_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c03
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.ACA_RESERVE_TYPE_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d04
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_POLICY_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c04
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.ACA_POLICY_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d05
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_DATE_ID_RECOVERY_TRANSACTION_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c05
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.ACA_DATE_ID_RECOVERY_TRANSACTION_DATE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d06
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_DATE_ID_RECOVERY_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c06
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.ACA_DATE_ID_RECOVERY_DATE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d07
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(30)
+        description: ''
+        name: SOURCE_SYSTEM_CLAIM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c07
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.SOURCE_SYSTEM_CLAIM_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d08
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: DATE
+        description: ''
+        name: RECOVERY_TRANSACTION_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c08
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.RECOVERY_TRANSACTION_DATE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d09
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: DATE
+        description: ''
+        name: RECOVERY_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c09
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.RECOVERY_DATE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d10
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(4)
+        description: ''
+        name: TRANSACTION_SEQUENCE_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c10
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.TRANSACTION_SEQUENCE_NUMBER
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d11
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: CHAR(2)
+        description: ''
+        name: PAYMENT_TYPE_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c11
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.PAYMENT_TYPE_CODE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d12
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: CHAR(2)
+        description: ''
+        name: COVERAGE_GROUP_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c12
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.COVERAGE_GROUP_CODE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d13
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(16)
+        description: ''
+        name: RESERVE_TYPE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c13
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.RESERVE_TYPE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d14
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: NUMBER(19,2)
+        description: ''
+        name: RECOVERY_AMOUNT_BY_RESERVE_TYPE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c14
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.RECOVERY_AMOUNT_BY_RESERVE_TYPE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d15
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: NUMBER(19,2)
+        description: ''
+        name: RECOVERY_COST
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c15
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.RECOVERY_COST
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d16
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: CHAR(1)
+        description: ''
+        name: RECOVERY_TYPE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c16
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.RECOVERY_TYPE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d17
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(66)
+        description: ''
+        name: RECOVERY_MESSAGE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c17
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.RECOVERY_MESSAGE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d18
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(6)
+        description: ''
+        name: RECIPIENT_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c18
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.RECIPIENT_NUMBER
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d19
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(1)
+        description: ''
+        name: SUBROGATION_TYPE_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c19
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.SUBROGATION_TYPE_FLAG
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d20
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(2)
+        description: ''
+        name: GB_INTERNAL_USE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c20
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.GB_INTERNAL_USE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d21
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(2)
+        description: ''
+        name: PLAN_SEQUENCE_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c21
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.PLAN_SEQUENCE_NUMBER
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d22
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR(5)
+        description: ''
+        name: PLAN_CLIENT_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c22
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.PLAN_CLIENT_NUMBER
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d23
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e5e5e5e-6f6f-7a7a-8b8b-9c9c9c9c9c23
+                stepCounter: 55e6f7a8-b9c0-8d1e-2f3a-4b5c6d7e8f95
+            transform: SRC.ACA_SOURCE_SYSTEM_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d24
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: ACA_DATE_CREATED
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CURRENT_TIMESTAMP()
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d25
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR
+        description: ''
+        name: ACA_CREATE_USER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: '''spaca_aca_recovery_transaction_deleteInsert'''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d26
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: ACA_DATE_UPDATED
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CURRENT_TIMESTAMP()
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f6f6f6f-7a7a-8b8b-9c9c-0d0d0d0d0d27
+          stepCounter: 66f7a8b9-c0d1-9e2f-3a4b-5c6d7e8f9a06
+        config: {}
+        dataType: VARCHAR
+        description: ''
+        name: ACA_UPDATE_USER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: '''spaca_aca_recovery_transaction_deleteInsert'''
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          SRC: SRC
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+            nodeName: STG_UNION_RECOVERY_TRANSACTION
+        join:
+          joinCondition: FROM {{ ref('ALLIANT_CLAIMS_ASTRUS_DBO', 'STG_UNION_RECOVERY_TRANSACTION')
+            }} AS SRC
+        name: ACA_RECOVERY_TRANSACTION
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1

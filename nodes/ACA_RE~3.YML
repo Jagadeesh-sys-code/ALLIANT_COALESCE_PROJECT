@@ -1,0 +1,376 @@
+fileVersion: 1
+id: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+name: ACA_RECOVERY_TRANSACTION_STAGING_GB
+type: Node
+operation:
+  name: ACA_RECOVERY_TRANSACTION_STAGING_GB
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_STAGE_DBO
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e01
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: BINARY(16)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_RECOVERY_TRANSACTION_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e02
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_CLAIM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e03
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_RESERVE_TYPE_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e04
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_POLICY_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e05
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: DATE
+        defaultValue: ''
+        description: ''
+        name: RECOVERY_TRANSACTION_DATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e06
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: DATE
+        defaultValue: ''
+        description: ''
+        name: RECOVERY_DATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e07
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(30)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_CLAIM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e08
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(4)
+        defaultValue: ''
+        description: ''
+        name: TRANSACTION_SEQUENCE_NUMBER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e09
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: CHAR(2)
+        defaultValue: ''
+        description: ''
+        name: COVERAGE_GROUP_CODE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e10
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(16)
+        defaultValue: ''
+        description: ''
+        name: RESERVE_TYPE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e11
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: NUMBER(19,2)
+        defaultValue: ''
+        description: ''
+        name: RECOVERY_AMOUNT_BY_RESERVE_TYPE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e12
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: NUMBER(19,2)
+        defaultValue: ''
+        description: ''
+        name: RECOVERY_COST
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e13
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: CHAR(1)
+        defaultValue: ''
+        description: ''
+        name: RECOVERY_TYPE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e14
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(66)
+        defaultValue: ''
+        description: ''
+        name: RECOVERY_MESSAGE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e15
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(6)
+        defaultValue: ''
+        description: ''
+        name: RECIPIENT_NUMBER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e16
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(1)
+        defaultValue: ''
+        description: ''
+        name: SUBROGATION_TYPE_FLAG
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e17
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(2)
+        defaultValue: ''
+        description: ''
+        name: GB_INTERNAL_USE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e18
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(2)
+        defaultValue: ''
+        description: ''
+        name: PLAN_SEQUENCE_NUMBER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e19
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: VARCHAR(5)
+        defaultValue: ''
+        description: ''
+        name: PLAN_CLIENT_NUMBER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1a1a1a1a-2b2b-3c3c-4d4d-5e5e5e5e5e20
+          stepCounter: 11a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b51
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+  schema: ''
+  sqlType: Source
+  version: 1
