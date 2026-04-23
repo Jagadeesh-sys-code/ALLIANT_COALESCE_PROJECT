@@ -1,0 +1,91 @@
+fileVersion: 1
+id: 1f2a3b4c-5d6e-7f8a-9b0c-1d2e3f4a5b6c
+name: STG_AGG_ACTUALS
+type: Node
+operation:
+  name: STG_AGG_ACTUALS
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: ''
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: true
+  database: ''
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: PLANNING_ALLIANT_STAGING
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b5c6d7e8-f9a0-1b2c-3d4e-5f6a7b8c9d0e
+          stepCounter: 1f2a3b4c-5d6e-7f8a-9b0c-1d2e3f4a5b6c
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: CLIENT_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d
+                stepCounter: 8c3b9d2a-7e1f-4a6c-9b5d-1f0e2a8c3b4d
+            transform: S.CLIENT_PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c6d7e8f9-a0b1-2c3d-4e5f-6a7b8c9d0e1f
+          stepCounter: 1f2a3b4c-5d6e-7f8a-9b0c-1d2e3f4a5b6c
+        config: {}
+        dataType: DATE
+        description: ''
+        name: BEGIN_POST_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e
+                stepCounter: 8c3b9d2a-7e1f-4a6c-9b5d-1f0e2a8c3b4d
+            transform: MIN(S.POST_DATE)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d7e8f9a0-b1c2-3d4e-5f6a-7b8c9d0e1f2a
+          stepCounter: 1f2a3b4c-5d6e-7f8a-9b0c-1d2e3f4a5b6c
+        config: {}
+        dataType: DATE
+        description: ''
+        name: END_POST_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e
+                stepCounter: 8c3b9d2a-7e1f-4a6c-9b5d-1f0e2a8c3b4d
+            transform: MAX(S.POST_DATE)
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          CL: CL
+          S: S
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: PLANNING_FCCS_ACTUALS_STAGING
+          - locationName: PLANNING_ALLIANT_STAGING
+            nodeName: TMPCLIENTLIST
+        join:
+          joinCondition: 'FROM {{ ref(''PLANNING_ALLIANT_DBO'', ''PLANNING_FCCS_ACTUALS_STAGING'')
+            }} AS S
+
+            INNER JOIN {{ ref(''PLANNING_ALLIANT_STAGING'', ''TMPCLIENTLIST'') }}
+            AS CL ON S.CLIENT_PLANNING_ID = CL.PLANNING_ID
+
+            GROUP BY S.CLIENT_PLANNING_ID'
+        name: STG_AGG_ACTUALS
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1
