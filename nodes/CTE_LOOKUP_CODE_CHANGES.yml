@@ -1,0 +1,136 @@
+fileVersion: 1
+id: 8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d
+name: CTE_LOOKUP_CODE_CHANGES
+type: Node
+operation:
+  name: CTE_LOOKUP_CODE_CHANGES
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: ''
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: true
+  database: PLANNING_ALLIANT
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: PLANNING_ALLIANT_DBO
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9c0d1e2f-3a4b-45c6-7d8e-9f0a1b2c3d4e
+          stepCounter: 8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d
+        config: {}
+        dataType: VARCHAR(50)
+        description: ''
+        name: CHANGE_TYPE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST('LookupCode' AS VARCHAR(50))
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0d1e2f3a-4b5c-46d7-8e9f-0a1b2c3d4e5f
+          stepCounter: 8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: f3b610c1-26c7-4340-a3e9-74e2d3bfa099
+                stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+            transform: N.PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1e2f3a4b-5c6d-47e8-9f0a-1b2c3d4e5f6a
+          stepCounter: 8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: ORIGINAL_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 2b3c4d5e-6f7a-48b9-0c1d-2e3f4a5b6c7d
+                stepCounter: 1a2b3c4d-5e6f-47a8-9b0c-1d2e3f4a5b6c
+            transform: O.PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2f3a4b5c-6d7e-48f9-0a1b-2c3d4e5f6a7b
+          stepCounter: 8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: ORIGINAL_LOOKUP_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 4d5e6f7a-8b9c-40d1-2e3f-4a5b6c7d8e9f
+                stepCounter: 1a2b3c4d-5e6f-47a8-9b0c-1d2e3f4a5b6c
+            transform: O.SOURCE_SYSTEM_BROKER_LOOKUP_CODE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3a4b5c6d-7e8f-49a0-1b2c-3d4e5f6a7b8c
+          stepCounter: 8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d
+        config: {}
+        dataType: VARCHAR(72)
+        description: ''
+        name: ORIGINAL_PLANNING_ALIAS
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 6f7a8b9c-0d1e-42f3-4a5b-6c7d8e9f0a1b
+                stepCounter: 1a2b3c4d-5e6f-47a8-9b0c-1d2e3f4a5b6c
+            transform: O.PLANNING_ALIAS
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4b5c6d7e-8f9a-40b1-2c3d-4e5f6a7b8c9d
+          stepCounter: 8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: DW_BROKER_MASTER_ID_ORIGINAL
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 7a8b9c0d-1e2f-43a4-5b6c-7d8e9f0a1b2c
+                stepCounter: 1a2b3c4d-5e6f-47a8-9b0c-1d2e3f4a5b6c
+            transform: O.DW_BROKER_MASTER_ID
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          BCC: BCC
+          N: N
+          O: O
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: TMP_NEW_PLANNING_BROKER
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: TMP_EXISTING_PLANNING_BROKER
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: PLANNING_FCCS_BROKER_CLIENT_CHANGES
+        join:
+          joinCondition: "FROM {{ ref('PLANNING_ALLIANT_DBO', 'TMP_NEW_PLANNING_BROKER')\
+            \ }} N\nINNER JOIN {{ ref('PLANNING_ALLIANT_DBO', 'TMP_EXISTING_PLANNING_BROKER')\
+            \ }} O ON N.SOURCE_SYSTEM = O.SOURCE_SYSTEM AND N.DW_BROKER_MASTER_ID\
+            \ = O.DW_BROKER_MASTER_ID\nLEFT OUTER JOIN {{ ref('PLANNING_ALLIANT_DBO',\
+            \ 'PLANNING_FCCS_BROKER_CLIENT_CHANGES') }} BCC ON N.DW_BROKER_MASTER_ID\
+            \ = BCC.DW_BROKER_CLIENT_MASTER_ID \n   AND N.SOURCE_SYSTEM = BCC.SOURCE_SYSTEM\
+            \ \n   AND BCC.DIMENSION_TYPE = 'Broker' \n   AND BCC.CHANGE_TYPE = 'LookupCode'\n\
+            WHERE N.SOURCE_SYSTEM_BROKER_LOOKUP_CODE <> O.SOURCE_SYSTEM_BROKER_LOOKUP_CODE\n\
+            AND BCC.PLANNING_ID IS NULL"
+        name: CTE_LOOKUP_CODE_CHANGES
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1

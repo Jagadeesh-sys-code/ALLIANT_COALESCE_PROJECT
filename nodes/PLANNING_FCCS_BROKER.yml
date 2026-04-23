@@ -1,0 +1,178 @@
+fileVersion: 1
+id: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+name: PLANNING_FCCS_BROKER
+type: Node
+operation:
+  name: PLANNING_FCCS_BROKER
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: PLANNING_ALLIANT_DBO
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: f7b2c9a1-cccc-42a9-8d7e-5c4b91a3d8e6
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: DW_SOURCE_SYSTEM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: e8a1b2c9-dddd-41b8-9c6e-4b5a82d3e9f7
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_BROKER_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: d9b2a1c8-ffff-45c7-8b9e-3a4f91c6d8e5
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ''
+        description: ''
+        name: PARENT_PLANNING_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: c8a1b9d2-1234-41e9-9f7a-2b5c83d4e7a6
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ''
+        description: ''
+        name: PLANNING_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: b9d2c8a1-5678-45a8-8e6f-1c4a92b3d7e9
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ''
+        description: ''
+        name: BROKER_LOOKUP_CODE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: a1c9b2d8-9012-42c9-9d7e-5b4f81a6c9d7
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_BROKER_LOOKUP_CODE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9b2d8a1c-3456-41b8-8c9e-4a5f92c7d8e6
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8c1a9b2d-7890-45d7-9b8e-3c4a81b5d9f6
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: VARCHAR(72)
+        defaultValue: ''
+        description: ''
+        name: PLANNING_ALIAS
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7d8b1c9a-2345-42e9-8a7f-2b5c91a4e8d7
+          stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: DW_BROKER_MASTER_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+  schema: ''
+  sqlType: Source
+  version: 1
