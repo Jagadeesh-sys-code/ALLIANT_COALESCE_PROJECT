@@ -1,0 +1,305 @@
+fileVersion: 1
+id: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+name: TMP_NEW_PLANNING_BROKER
+operation:
+  config:
+    insertStrategy: INSERT
+    postSQL: |-
+      BEGIN
+          UPDATE PLANNING_ALLIANT.DBO.TMP_NEW_PLANNING_BROKER AS TGT
+          SET
+              TGT.GROUP_ID = SRC.NEW_GROUP_ID,
+              TGT.GROUP_NAME = SRC.NEW_GROUP_ID || '_Producer_Parent',
+              TGT.PARENT_PLANNING_ID = SRC.NEW_GROUP_ID || '_Producer_Parent'
+          FROM (
+              WITH PARAMS AS (
+                  SELECT
+                      COALESCE(MAX(TRY_CAST(SUBSTRING(PARENT_PLANNING_ID, 1, POSITION('_' IN PARENT_PLANNING_ID) - 1) AS INT)), 0) AS MAX_GROUP_ID,
+                      (SELECT COUNT(1) FROM {{ ref_no_link('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_BROKER') }} WHERE TRY_CAST(SUBSTRING(PARENT_PLANNING_ID, 1, POSITION('_' IN PARENT_PLANNING_ID) - 1) AS INT) = MAX_GROUP_ID) AS COUNT_OF_MAX_GROUP_ID,
+                      300 AS BATCH_SIZE
+                  FROM {{ ref_no_link('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_BROKER') }}
+              ),
+              UNASSIGNED_ROWS AS (
+                  SELECT
+                      ROW_ID,
+                      ROW_NUMBER() OVER (ORDER BY ROW_ID) AS RN
+                  FROM {{ ref_no_link('PLANNING_ALLIANT_DBO', 'TMP_NEW_PLANNING_BROKER') }}
+                  WHERE GROUP_ID IS NULL
+              )
+              SELECT
+                  UR.ROW_ID,
+                  CASE
+                      WHEN P.MAX_GROUP_ID > 0 AND UR.RN <= (P.BATCH_SIZE - P.COUNT_OF_MAX_GROUP_ID) THEN P.MAX_GROUP_ID
+                      ELSE P.MAX_GROUP_ID + CEIL( (UR.RN - (CASE WHEN P.MAX_GROUP_ID > 0 THEN (P.BATCH_SIZE - P.COUNT_OF_MAX_GROUP_ID) ELSE 0 END)) / P.BATCH_SIZE::FLOAT )
+                  END AS NEW_GROUP_ID
+              FROM UNASSIGNED_ROWS UR
+              CROSS JOIN PARAMS P
+          ) AS SRC
+          WHERE TGT.ROW_ID = SRC.ROW_ID;
+      END;
+    preSQL: ""
+    testsEnabled: true
+    truncateBefore: true
+  database: PLANNING_ALLIANT
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: PLANNING_ALLIANT_DBO
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e8f49704-58eb-4e66-a6fc-6e792e3d3688
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: PARENT_PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d9b2a1c8-ffff-45c7-8b9e-3a4f91c6d8e5
+                stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+            transform: B.PARENT_PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f3b610c1-26c7-4340-a3e9-74e2d3bfa099
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: PLANNING_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3a9b1c4e-4444-42f8-8a56-2b4f91c7d8e6
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.BROKER_PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e3d231af-5d8f-4a37-b93e-cbfe092d6e4b
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: BROKER_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 7b2c9a1d-5555-43a1-9c8e-5b1f82c4d9e7
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.BROKER_NAME
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 620f4c1e-9665-4f32-ab20-bc2f718d7f2a
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: BROKER_LOOKUP_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 9e1d8c2b-6666-41e9-8b7a-4c2f93e5d7a6
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.BROKER_LOOKUP_CODE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 734f19b2-38ef-4678-a28d-6e8d2e3f4c12
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: CHAR(1)
+        description: ""
+        name: BROKER_STATUS_INDICATOR
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 4f2a9b1c-7777-45a8-9d6e-1c5f82b3d7a9
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.BROKER_STATUS_INDICATOR
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a0f7c25e-e7e8-46fb-9b2f-1a9e3f4c8b21
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(72)
+        description: ""
+        name: BROKER_ALIAS
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5a9b2c1d-8888-42c9-8e7f-3b4a91c6d8e5
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.BROKER_ALIAS
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c5f3e790-db0e-43f1-b9b0-9e8c4a1e3b6f
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(50)
+        description: ""
+        name: SOURCE_SYSTEM_BROKER_LOOKUP_CODE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 6b1c8a2d-9999-41b8-9f6e-2c5a83b4d7e9
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.SOURCE_SYSTEM_BROKER_LOOKUP_CODE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b7e9c512-421b-4f9e-93c4-0a8b9c6d7e23
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(50)
+        description: ""
+        name: SOURCE_SYSTEM_BROKER_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 8fd3b29c-3333-41a9-9526-f72b91c4e85f
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.SOURCE_SYSTEM_BROKER_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2d4f8b91-e6c7-458f-b9f1-3c7a8e2d4b65
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: SOURCE_SYSTEM
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 2c8a9b1d-0000-45c7-8d9e-1b4f92c6e8a7
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.SOURCE_SYSTEM
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d8f4b13e-6a5b-439f-9c8e-2a9c1e3f6b4d
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ""
+        name: DW_BROKER_MASTER_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 1d9b2c8a-aaaa-42d8-9e7f-3c5a81b4d9e6
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.DW_BROKER_MASTER_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f4a8b792-5e6f-4a8b-c9e1-6b8c9d2f4e31
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ""
+        name: DW_SOURCE_SYSTEM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c174f82a-2222-4412-b91c-8092a9b3f6d7
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: STG.DW_SOURCE_SYSTEM_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7e9c2b81-a5f4-4b6e-c8d9-3f1a2b8c9e4d
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: NUMBER(19,0)
+        description: ""
+        name: ROW_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 2c8a9b1d-0000-45c7-8d9e-1b4f92c6e8a7
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+              - columnCounter: 1d9b2c8a-aaaa-42d8-9e7f-3c5a81b4d9e6
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: ROW_NUMBER() OVER(ORDER BY STG.SOURCE_SYSTEM, STG.DW_BROKER_MASTER_ID)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a5f4c9b2-6e7d-48a1-b3f8-9e1c2a4b6d7f
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ""
+        name: GROUP_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d9b2a1c8-ffff-45c7-8b9e-3a4f91c6d8e5
+                stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+            transform: TRY_CAST(SUBSTRING(B.PARENT_PLANNING_ID,1, POSITION('_' IN B.PARENT_PLANNING_ID)-1) AS NUMBER(10,0))
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8b1c9f4e-2a7d-46b5-8f3c-9e2a4b1c8d7e
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: GROUP_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d9b2a1c8-ffff-45c7-8b9e-3a4f91c6d8e5
+                stepCounter: d41c9f8b-eeee-4389-a215-3b7c81a9f6d4
+            transform: B.PARENT_PLANNING_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c7a2b9f4-1e8d-4f3b-6a9c-2f4b8e1d7c3a
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: DATE
+        description: ""
+        name: BEGIN_POST_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 8a2c1b9d-bbbb-41e9-8f7a-4b5c92d6e8a7
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: MIN(STG.POST_DATE)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9d8b1c4a-3e2f-48b6-9f1c-7e2a4b8c3d9e
+          stepCounter: 9e1d8c2b-ef01-45e8-8c7a-5b4a92c3d8f7
+        config: {}
+        dataType: DATE
+        description: ""
+        name: END_POST_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 8a2c1b9d-bbbb-41e9-8f7a-4b5c92d6e8a7
+                stepCounter: e52b2f67-1111-4475-8134-2e9f1a23c89d
+            transform: MAX(STG.POST_DATE)
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          B: B
+          STG: STG
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: PLANNING_FCCS_ACTUALS_STAGING
+          - locationName: PLANNING_ALLIANT_DBO
+            nodeName: PLANNING_FCCS_BROKER
+        join:
+          joinCondition: |-
+            FROM {{ ref('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_ACTUALS_STAGING') }} STG
+            LEFT OUTER JOIN {{ ref('PLANNING_ALLIANT_DBO', 'PLANNING_FCCS_BROKER') }} B ON STG.DW_SOURCE_SYSTEM_ID = B.DW_SOURCE_SYSTEM_ID AND STG.SOURCE_SYSTEM_BROKER_ID = B.SOURCE_SYSTEM_BROKER_ID
+            WHERE STG.BROKER_PLANNING_ID <> 'No_Producer' AND STG.OPERATING_GROUP = 'Americas' AND COALESCE(STG.THRESHOLD_RULE_TYPE, '-1') <> 'Threshold Structure'
+            GROUP BY B.PARENT_PLANNING_ID, STG.BROKER_PLANNING_ID, STG.BROKER_NAME, STG.BROKER_LOOKUP_CODE, STG.BROKER_STATUS_INDICATOR, STG.BROKER_ALIAS, STG.SOURCE_SYSTEM_BROKER_LOOKUP_CODE, STG.SOURCE_SYSTEM_BROKER_ID, STG.SOURCE_SYSTEM, STG.DW_BROKER_MASTER_ID, STG.DW_SOURCE_SYSTEM_ID, TRY_CAST(SUBSTRING(B.PARENT_PLANNING_ID,1, POSITION('_' IN B.PARENT_PLANNING_ID)-1) AS NUMBER(10,0))
+        name: TMP_NEW_PLANNING_BROKER
+        noLinkRefs: []
+  name: TMP_NEW_PLANNING_BROKER
+  overrideSQL: false
+  schema: ""
+  sqlType: Stage
+  type: sql
+  version: 1
+type: Node

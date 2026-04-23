@@ -1,0 +1,187 @@
+fileVersion: 1
+id: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+name: ACA_NCCI_LOSS_COVERAGE_CODE
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: DBSHIFT
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 49b5299e-442c-4188-97c1-87022b7e50ac
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        name: ACA_NCCI_LOSS_COVERAGE_CODE_ID
+        nullable: false
+        primaryKey: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9940b097-bcb5-4e98-9433-4c43635cba1f
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: VARCHAR(5)
+        defaultValue: ""
+        description: ""
+        name: SOURCE_SYSTEM_NCCI_LOSS_COVERAGE_CODE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: true
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 099fd931-57f4-42ce-9104-653f3321db81
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: VARCHAR(2)
+        defaultValue: ""
+        description: ""
+        name: BENEFIT_STATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 04e8774b-2549-46f0-ae43-874f7d91f84f
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: VARCHAR(2)
+        defaultValue: ""
+        description: ""
+        name: NCCI_LOSS_COVERAGE_CODE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2053ae5d-4dc9-4a5f-bc30-e154f7fb3d91
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: NCCI_LOSS_COVERAGE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5eebe869-6fb1-40f4-bd52-97cfcc5de7a7
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: TIMESTAMP_NTZ(9)
+        defaultValue: ""
+        description: ""
+        name: ACA_DATE_CREATED
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 45901c98-1c36-4192-b576-dd25d1ab8c6c
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: ACA_CREATE_USER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4abe71df-3b9b-4346-b8a7-846377f7d094
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: TIMESTAMP_NTZ(9)
+        defaultValue: ""
+        description: ""
+        name: ACA_DATE_UPDATED
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6aac46c2-eb6a-4e5e-a471-7c5f8d2a9410
+          stepCounter: eccb0e8e-23bb-4632-bb89-0795cc810f2b
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: ACA_UPDATE_USER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+  name: ACA_NCCI_LOSS_COVERAGE_CODE
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node

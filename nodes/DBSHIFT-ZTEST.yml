@@ -1,0 +1,73 @@
+fileVersion: 1
+id: 7ef4b0fa-aa16-48c7-b011-5adb8bab91de
+name: ZTEST
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: DBSHIFT
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: db556dab-4b70-4ab4-89ee-d47232e93357
+          stepCounter: 7ef4b0fa-aa16-48c7-b011-5adb8bab91de
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        name: ACA_TRANSACTION_CLAIM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 21b528eb-59bc-440c-b889-df4d09bb03b7
+          stepCounter: 7ef4b0fa-aa16-48c7-b011-5adb8bab91de
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ""
+        description: ""
+        name: CLAIMANT_FIRSTNAME
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8e5a49e4-80a9-4e4d-91a8-5ef7c1daccbc
+          stepCounter: 7ef4b0fa-aa16-48c7-b011-5adb8bab91de
+        config: {}
+        dataType: BINARY(255)
+        defaultValue: ""
+        description: ""
+        name: FIRST_NAME_ENCRYPTED
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+  name: ZTEST
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node
