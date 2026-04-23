@@ -1,0 +1,200 @@
+fileVersion: 1
+id: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+name: ACA_POLICY_ESIS
+type: Node
+operation:
+  name: ACA_POLICY_ESIS
+  type: sql
+  config:
+    insertStrategy: INSERT
+    postSQL: "BEGIN\n    UPDATE ALLIANT_CLAIMS_ASTRUS.DBO.ACA_POLICY_ESIS AS T\n \
+      \   SET \n        T.ACA_DATE_ID_EXPIRATION_DATE = CAST(TO_VARCHAR(S.EXPIRATION_DATE,\
+      \ 'YYYYMMDD') AS INT),\n        T.EXPIRATION_DATE = S.EXPIRATION_DATE,\n   \
+      \     T.ACA_DATE_UPDATED = CURRENT_TIMESTAMP(),\n        T.ACA_UPDATE_USER =\
+      \ 'spaca_aca_policy_esis_insertUpdate'\n    FROM {{ ref('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO',\
+      \ 'ACA_POLICY_STAGING_ESIS') }} AS S\n    WHERE T.SOURCE_SYSTEM_POLICY_ID =\
+      \ S.SOURCE_SYSTEM_POLICY_ID\n      AND T.ACA_SOURCE_SYSTEM_ID = S.ACA_SOURCE_SYSTEM_ID\n\
+      \      AND T.ACA_DATE_CREATED <> CURRENT_TIMESTAMP()\n      AND IFNULL(T.EXPIRATION_DATE,\
+      \ CAST('1776-07-04' AS DATE)) <> IFNULL(S.EXPIRATION_DATE, CAST('1776-07-04'\
+      \ AS DATE));\nEND;"
+    preSQL: ''
+    testsEnabled: true
+    truncateBefore: false
+  database: ''
+  deployEnabled: true
+  description: ''
+  isMultisource: false
+  locationName: ALLIANT_CLAIMS_ASTRUS_DBO
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 644558e8-6931-41eb-8c11-925ee190a9af
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: BINARY(16)
+        description: ''
+        isBusinessKey: true
+        name: SOURCE_SYSTEM_POLICY_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d302a64c-f12b-4171-aa31-e160a2fc8a14
+                stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+            transform: S.SOURCE_SYSTEM_POLICY_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 73c21a41-3db3-43ed-a476-8cc0803450d0
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_DATE_ID_EFFECTIVE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 174621eb-9877-440f-90e6-52c6f37d6e6d
+                stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+            transform: CAST(TO_VARCHAR(S.EFFECTIVE_DATE, 'YYYYMMDD') AS INT)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: ad0d2b45-12b2-4d29-a1b7-9ba04ecf46f3
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        name: ACA_DATE_ID_EXPIRATION_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ea4eb63f-6799-4c28-bbcf-d1df5251662c
+                stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+            transform: CAST(TO_VARCHAR(S.EXPIRATION_DATE, 'YYYYMMDD') AS INT)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: ff9c04d0-60b6-455b-8f35-edcf04e38e6e
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: VARCHAR(30)
+        description: ''
+        name: POLICY_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: bfa450d0-0cd3-4cf1-831e-450a18413dd6
+                stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+            transform: S.POLICY_NUMBER
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4af26a97-9005-4f40-ab96-e24cda4ed268
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: DATE
+        description: ''
+        name: EFFECTIVE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 174621eb-9877-440f-90e6-52c6f37d6e6d
+                stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+            transform: S.EFFECTIVE_DATE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f734493d-4c3e-46cb-8d5c-dcc594586f1e
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: DATE
+        description: ''
+        name: EXPIRATION_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ea4eb63f-6799-4c28-bbcf-d1df5251662c
+                stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+            transform: S.EXPIRATION_DATE
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4cd1405e-fbb8-4f22-ad0b-a1e4a64380eb
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: NUMBER(10,0)
+        description: ''
+        isBusinessKey: true
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 8798e4d8-ca54-46bb-9e2d-304fb0f49410
+                stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+            transform: S.ACA_SOURCE_SYSTEM_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2a10c7ec-7ce5-4166-87c2-19e9921b777a
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: ACA_DATE_CREATED
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CURRENT_TIMESTAMP()
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: ec843f51-240f-48dc-ba4b-48600d11c79a
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: ACA_CREATE_USER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: '''spaca_aca_policy_esis_insertUpdate'''
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1edfa5c0-1090-4c48-8df0-f2af50e0503f
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: TIMESTAMP_NTZ
+        description: ''
+        name: ACA_DATE_UPDATED
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CURRENT_TIMESTAMP()
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3f9fc32a-5690-4ab8-9af2-04e3415c82ff
+          stepCounter: fd3a48e4-18e3-460d-85fa-80ea5210c85c
+        config: {}
+        dataType: VARCHAR(100)
+        description: ''
+        name: ACA_UPDATE_USER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: '''spaca_aca_policy_esis_insertUpdate'''
+    cteString: ''
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          S: S
+        customSQL:
+          customSQL: ''
+        dependencies:
+          - locationName: ALLIANT_CLAIMS_ASTRUS_STAGE_DBO
+            nodeName: ACA_POLICY_STAGING_ESIS
+        join:
+          joinCondition: "FROM {{ ref('ALLIANT_CLAIMS_ASTRUS_STAGE_DBO', 'ACA_POLICY_STAGING_ESIS')\
+            \ }} AS S\nLEFT JOIN ALLIANT_CLAIMS_ASTRUS.DBO.ACA_POLICY_ESIS AS T\n\
+            \  ON T.SOURCE_SYSTEM_POLICY_ID = S.SOURCE_SYSTEM_POLICY_ID\n AND T.ACA_SOURCE_SYSTEM_ID\
+            \ = S.ACA_SOURCE_SYSTEM_ID\nWHERE T.ACA_POLICY_ESIS_ID IS NULL"
+        name: ACA_POLICY_ESIS
+        noLinkRefs: []
+  overrideSQL: false
+  schema: ''
+  sqlType: Stage
+  version: 1

@@ -1,0 +1,106 @@
+fileVersion: 1
+id: a819f7e3-0d65-4f32-be4c-7c093a8d11e5
+name: PLANNING_FCCS_BROKER_CLIENT_CHANGES
+type: Node
+operation:
+  name: PLANNING_FCCS_BROKER_CLIENT_CHANGES
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: PLANNING_ALLIANT_DBO
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: fc825021-f111-4475-8134-8c1d53e346f1
+          stepCounter: a819f7e3-0d65-4f32-be4c-7c093a8d11e5
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: DW_BROKER_CLIENT_MASTER_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 56d7732a-cdfb-4f27-a068-0ef992db1c22
+          stepCounter: a819f7e3-0d65-4f32-be4c-7c093a8d11e5
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1b131972-2736-47b2-bd7e-d392cf99a113
+          stepCounter: a819f7e3-0d65-4f32-be4c-7c093a8d11e5
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ''
+        description: ''
+        name: DIMENSION_TYPE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 85c5f854-8c4d-4569-8d76-e3d81b8941f4
+          stepCounter: a819f7e3-0d65-4f32-be4c-7c093a8d11e5
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ''
+        description: ''
+        name: CHANGE_TYPE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 31d054d8-7b95-46f9-aa2b-b4a1b8e4f165
+          stepCounter: a819f7e3-0d65-4f32-be4c-7c093a8d11e5
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ''
+        description: ''
+        name: PLANNING_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+  schema: ''
+  sqlType: Source
+  version: 1

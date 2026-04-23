@@ -1,0 +1,106 @@
+fileVersion: 1
+id: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+name: ACA_POLICY_STAGING_ESIS
+type: Node
+operation:
+  name: ACA_POLICY_STAGING_ESIS
+  type: sourceInput
+  database: ''
+  deployEnabled: true
+  description: ''
+  locationName: ALLIANT_CLAIMS_ASTRUS_STAGE_DBO
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: d302a64c-f12b-4171-aa31-e160a2fc8a14
+          stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+        config: {}
+        dataType: BINARY(16)
+        defaultValue: ''
+        description: ''
+        name: SOURCE_SYSTEM_POLICY_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 174621eb-9877-440f-90e6-52c6f37d6e6d
+          stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+        config: {}
+        dataType: DATE
+        defaultValue: ''
+        description: ''
+        name: EFFECTIVE_DATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: ea4eb63f-6799-4c28-bbcf-d1df5251662c
+          stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+        config: {}
+        dataType: DATE
+        defaultValue: ''
+        description: ''
+        name: EXPIRATION_DATE
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: bfa450d0-0cd3-4cf1-831e-450a18413dd6
+          stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+        config: {}
+        dataType: VARCHAR(30)
+        defaultValue: ''
+        description: ''
+        name: POLICY_NUMBER
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8798e4d8-ca54-46bb-9e2d-304fb0f49410
+          stepCounter: 08569c70-9831-4e78-bc48-bfb965f8c6eb
+        config: {}
+        dataType: NUMBER(10,0)
+        defaultValue: ''
+        description: ''
+        name: ACA_SOURCE_SYSTEM_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ''
+        uniqueKey: false
+  schema: ''
+  sqlType: Source
+  version: 1
