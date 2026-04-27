@@ -2,4 +2,5 @@ defaultStorageMapping: TARGET
 fileVersion: 1
 locations:
   - DBSHIFT
+  - SRC-ASTRUS
   - TARGET
